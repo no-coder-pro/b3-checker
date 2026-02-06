@@ -35,9 +35,12 @@
         display: flex;
         justify-content: center;
         align-items: flex-start;
+        /* Align to top */
         min-height: 100vh;
         width: 100vw;
+        /* Viewport width */
         overflow-x: hidden;
+        /* Horizontal scrollbar এড়ানো */
     }
 
     .main-wrapper {
@@ -48,8 +51,10 @@
         flex-direction: column;
         padding-bottom: 20px;
         min-height: 100vh;
+        /* Make sure it takes full height */
     }
 
+    /* Header Styling */
     .top-header {
         background-color: var(--medium-blue);
         padding: 15px 25px;
@@ -76,6 +81,10 @@
         color: var(--text-color-light);
     }
 
+    .menu-toggle:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
     .menu-container {
         position: relative;
         display: inline-block;
@@ -90,6 +99,7 @@
         transition: background 0.3s;
     }
 
+    /* Dropdown menu base style */
     .dropdown-menu {
         position: absolute;
         right: 0;
@@ -108,6 +118,7 @@
         transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
     }
 
+    /* Show dropdown */
     .dropdown-menu.show {
         opacity: 1;
         transform: translateY(0);
@@ -126,6 +137,14 @@
     }
 
     .dropdown-menu li a:hover {
+        background-color: #f5f5f5;
+    }
+
+    .dropdown-menu li:last-child a {
+        border-bottom: none;
+    }
+
+    .dropdown-menu li a:hover {
         background-color: #fa0707;
     }
 
@@ -136,6 +155,7 @@
     .info-card {
         box-sizing: border-box;
         width: calc(100% - 40px);
+        /* দুই পাশে ২০px ফাঁকা রাখবে */
         margin: 12px;
         padding: 1px 24px;
         background-color: #f8f9fa;
@@ -150,20 +170,36 @@
         font-family: 'Rubik', sans-serif;
     }
 
+    .info-card strong {
+        color: #0d6efd;
+    }
+
+    .info-card em {
+        color: #dc3545;
+    }
+
+    .info-card u {
+        text-decoration-color: #ffc107;
+    }
+
     .container {
         padding: 20px 25px;
         background-color: var(--dark-blue);
     }
 
+    /* Input and Output Section - Main checker layout */
     .input-output-section {
         display: flex;
         gap: 20px;
         flex-wrap: wrap;
+        /* Allow wrapping for responsiveness */
     }
 
     .input-fields {
         flex: 1;
+        /* Takes roughly half space */
         min-width: 300px;
+        /* Minimum width for responsiveness */
         display: flex;
         flex-direction: column;
         gap: 15px;
@@ -177,14 +213,23 @@
     }
 
     .input-group textarea,
-    .input-group input[type="text"] {
+    .input-group input[type="text"],
+    .input-group input[type="number"] {
         width: calc(100% - 20px);
+        /* Adjust for padding */
         padding: 10px;
         background-color: var(--medium-blue);
         border: 1px solid var(--light-blue);
         border-radius: 5px;
         color: var(--text-color-light);
         font-size: 16px;
+        resize: vertical;
+        /* Allow vertical resizing for textarea */
+    }
+
+    .input-group input::placeholder,
+    .input-group textarea::placeholder {
+        color: rgba(255, 255, 255, 0.5);
     }
 
     .action-buttons {
@@ -206,20 +251,49 @@
     }
 
     .generate-btn {
+        /* This will be Start Checking */
         background-color: var(--yellow-btn);
         color: var(--text-color-dark);
     }
 
+    .generate-btn:hover:not([disabled]) {
+        background-color: #e0a800;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
     .copy-btn {
+        /* This will be Stop Checking */
         background-color: var(--orange-btn);
         color: var(--text-color-dark);
     }
 
+    .copy-btn:hover:not([disabled]) {
+        background-color: #fb8c00;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .generate-btn[disabled],
+    .copy-btn[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+
     .result-area {
         flex: 1;
+        /* Takes roughly half space */
         min-width: 300px;
+        /* Minimum width for responsiveness */
         display: flex;
         flex-direction: column;
+    }
+
+    .result-area label {
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: var(--text-color-light);
     }
 
     .result-area textarea {
@@ -233,15 +307,44 @@
         font-size: 16px;
         resize: vertical;
         min-height: 200px;
+        /* Adjusted height to look more like the screenshot */
         white-space: pre;
+        /* Preserve line breaks */
+        word-wrap: normal;
+        /* Do not wrap long words */
         overflow-x: auto;
+        /* Allow horizontal scrolling for long lines */
     }
 
+    .result-area textarea::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .result-area textarea::-webkit-scrollbar-track {
+        background: var(--dark-blue);
+    }
+
+    .result-area textarea::-webkit-scrollbar-thumb {
+        background: var(--light-blue);
+        border-radius: 4px;
+    }
+
+    .result-area textarea::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+
+    /* New styles for checker summary sections */
     .checker-summary-section {
         display: grid;
+        /* Use grid for a flexible 3-column layout */
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        /* Responsive columns */
         gap: 20px;
+        /* Space between result containers */
         margin-top: 30px;
+        /* Space from above section */
         padding-top: 20px;
         border-top: 1px solid var(--light-blue);
     }
@@ -253,6 +356,7 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         display: flex;
         flex-direction: column;
+        gap: 1px;
     }
 
     .result-container h2 {
@@ -261,8 +365,18 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        /* Space out title and count */
     }
 
+    .result-container h2 .live,
+    .result-container h2 .dead,
+    .result-container h2 .unknown {
+        font-size: 24px;
+        /* Make count bigger */
+        font-weight: bold;
+    }
+
+    /* Specific colors for counts */
     .result-container h2 .live {
         color: var(--green);
     }
@@ -281,7 +395,27 @@
         color: var(--text-color-light);
         font-size: 14px;
         resize: vertical;
+        white-space: pre;
+        word-wrap: normal;
         overflow: auto;
+    }
+
+    .result-textarea::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    .result-textarea::-webkit-scrollbar-track {
+        background: var(--medium-blue);
+    }
+
+    .result-textarea::-webkit-scrollbar-thumb {
+        background: var(--light-blue);
+        border-radius: 3px;
+    }
+
+    .result-textarea::-webkit-scrollbar-thumb:hover {
+        background: #555;
     }
 
     .copy-btn-checker {
@@ -289,13 +423,22 @@
         border: none;
         border-radius: 5px;
         background-color: var(--orange-btn);
+        /* Using orange for copy buttons */
         color: var(--text-color-dark);
         font-weight: bold;
         cursor: pointer;
-        margin-top: 5px;
+        transition: background-color 0.3s ease;
         align-self: flex-end;
+        /* Align to the right bottom of the container */
+        margin-top: 5px;
+        /* Space from textarea */
     }
 
+    .copy-btn-checker:hover {
+        background-color: #fb8c00;
+    }
+
+    /* Footer Styling */
     .main-footer {
         text-align: center;
         margin-top: 30px;
@@ -305,11 +448,98 @@
         color: var(--text-color-light);
     }
 
-    .api-config {
-        margin-bottom: 20px;
-        background: var(--medium-blue);
-        padding: 10px;
-        border-radius: 8px;
+    .main-footer p {
+        margin: 0;
+        font-size: 14px;
+    }
+
+    .main-footer a {
+        color: var(--green);
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .main-footer a:hover {
+        text-decoration: underline;
+    }
+
+    /* Social Links */
+    .social-links {
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .social-links a {
+        color: var(--text-color-light);
+        font-size: 24px;
+        transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+        color: var(--green);
+    }
+
+    /* Colors for live/dead/unknown (if still used internally for counts) */
+    .live {
+        color: var(--green);
+    }
+
+    .dead {
+        color: var(--red-dead);
+    }
+
+
+    /* Media Queries */
+    @media (min-width: 1200px) {
+
+        /* Larger screens - full width with some padding */
+        .main-wrapper {
+            padding: 0 0px;
+            /* Add some side padding for very wide screens if desired */
+        }
+
+        .container {
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .input-output-section {
+            flex-direction: column;
+        }
+
+        .input-fields,
+        .result-area {
+            min-width: unset;
+            width: 100%;
+        }
+
+        .checker-summary-section {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .top-header {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-header h1 {
+            font-size: 20px;
+        }
+
+        .container {
+            padding: 15px;
+        }
+    }
+
+    .menu-toggle {
+        margin-left: 10px;
     }
 </style>
 
@@ -321,25 +551,65 @@
                 <h1>bBINl B3 CC Chkr</h1>
             </div>
             <div class="menu-container">
-                <div class="menu-toggle" onclick="toggleMenu()">
+                <div class="menu-toggle animated" onclick="toggleMenu()">
                     <i class="fas fa-bars"></i>
                 </div>
                 <ul class="dropdown-menu" id="dropdown-menu">
+                    <li><a href="https://bbinl.site/cc-gen/" target="_blank">💳 cc generator</a></li>
+                    <li><a href="https://bbinl.site/cc-checker-faker/" target="_blank">🔎 cc checker</a></li>
+                    <li><a href="https://bbinl.site/b3-checker/" target="_blank">🧠 b3 cc checker</a></li>
+                    <li><a href="https://bbinl.site/stripe-checker/" target="_blank">☠ stripe cc checker</a></li>
+                    <li><a href="https://bbinl.site/checker-top/" target="_blank">🔎 checker.top</a></li>
+                    <li><a href="https://bbinl.site/gen-chk/" target="_blank">🧰 cc gen + check</a></li>
+                    <li><a href="https://bbinl.site/fake-address/" target="_blank">⛩ Fake Address</a></li>
                     <li><a href="https://t.me/bro_bin_lagbe" target="_blank">👥 Join Us</a></li>
-                    <li><a href="https://github.com/bbinl" target="_blank">GitHub</a></li>
+                    <li><a href="" target="_blank">💎 bBINl all API</a></li>
                 </ul>
             </div>
         </header>
         <main class="container">
-            <div class="info-card">
-                <p><strong>braintree</strong> gateway checking. GitHub Pages Front + Vercel API.</p>
-            </div>
+            <center>
+                <script type="text/javascript">
+                    atOptions = {
+                        'key': 'aeb1dc240df8fbfaef1b2b68907cfd5a',
+                        'format': 'iframe',
+                        'height': 60,
+                        'width': 468,
+                        'params': {}
+                    };
+                </script>
+                <script type="text/javascript"
+                    src="//www.highperformanceformat.com/aeb1dc240df8fbfaef1b2b68907cfd5a/invoke.js"></script>
+            </center>
 
+            <div class="info-card">
+                <p>
+                    <strong>braintree</strong> এর gateway-তে fast checking করতে গেলে অনেক সময় দুইটা cc চেকের মাঝে
+                    <em>overlap</em> হয়ে যায় যার জন্য ভুল info আসতে পারে তাই <u>ret limit 5 sec</u> দেওয়া আছে
+                </p>
+            </div>
+            <center>
+                <script type="text/javascript">
+                    atOptions = {
+                        'key': '3c1293e760852e3cc5ffaaca4c1f2e77',
+                        'format': 'iframe',
+                        'height': 50,
+                        'width': 320,
+                        'params': {}
+                    };
+                </script>
+                <script type="text/javascript"
+                    src="//www.highperformanceformat.com/3c1293e760852e3cc5ffaaca4c1f2e77/invoke.js"></script>
+            </center>
+
+        </main>
+        <main class="container">
             <section class="input-output-section">
                 <div class="input-fields">
                     <div class="input-group">
                         <label for="numbers">Credit Card Numbers:</label>
-                        <textarea id="numbers" rows="10" placeholder="CC|MM|YY|CVV"></textarea>
+                        <textarea id="numbers" rows="10"
+                            placeholder="4111111111111111|12|25|123&#10;5500000000000004|11|24|456"></textarea>
                     </div>
 
                     <div class="action-buttons">
@@ -350,7 +620,7 @@
 
                 <div class="result-area">
                     <label for="result-output">Checking Status</label>
-                    <textarea id="result-output" readonly placeholder="Status..."></textarea>
+                    <textarea id="result-output" readonly placeholder="Checking status will appear here..."></textarea>
                 </div>
             </section>
 
@@ -367,11 +637,43 @@
                 </div>
             </section>
         </main>
+        <center>
+            <script type="text/javascript">
+                atOptions = {
+                    'key': '3c1293e760852e3cc5ffaaca4c1f2e77',
+                    'format': 'iframe',
+                    'height': 50,
+                    'width': 320,
+                    'params': {}
+                };
+            </script>
+            <script type="text/javascript"
+                src="//www.highperformanceformat.com/3c1293e760852e3cc5ffaaca4c1f2e77/invoke.js"></script>
+        </center>
         <footer class="main-footer">
-            <p>©Bro Bin Lagbe</p>
+            <p>Copyright 2025 All Rights Reserved <a href="https://t.me/bro_bin_lagbe"> &nbsp;©Bro Bin Lagbe </a></p>
+            <div class="social-links">
+                <a href="https://t.me/no_coder_pro" target="_blank" aria-label="Telegram"><i
+                        class="fab fa-telegram fa-2x"></i></a>
+                <a href="https://www.facebook.com/itz.mahir404/" target="_blank" aria-label="Facebook"><i
+                        class="fab fa-facebook fa-2x"></i></a>
+                <a href="https://github.com/bbinl" target="_blank" aria-label="GitHub"><i
+                        class="fab fa-github fa-2x"></i></a>
+            </div>
         </footer>
     </div>
     <script>
+        if (window.innerWidth >= 768) {
+            // এই শর্তটি নিশ্চিত করে যে স্ক্রিন সাইজ 768px বা তার বেশি হলেই কোডটি চলবে।
+            var adScript = document.createElement('script');
+            adScript.type = 'text/javascript';
+            adScript.src = '//pl27372759.profitableratecpm.com/fb/4f/37/fb4f377c61117088ab923c6d535b8371.js';
+
+            document.body.appendChild(adScript);
+        }
+    </script>
+    <script>
+
         const checkBtn = document.getElementById('check-btn');
         const stopCheckBtn = document.getElementById('stop-check-btn');
         const numbersTextarea = document.getElementById('numbers');
@@ -391,7 +693,7 @@
             stopChecking = true;
             stopCheckBtn.disabled = true;
             checkBtn.disabled = false;
-            appendToStatusOutput("⏹️ Stopped.\n");
+            appendToStatusOutput("⏹️ Checking stopped by user.\n");
         });
 
         async function startChecking() {
@@ -404,46 +706,92 @@
             stopChecking = false;
             liveCount = 0;
             deadCount = 0;
+
             resultOutputTextarea.value = "";
             liveNumbersTextarea.value = "";
             deadNumbersTextarea.value = "";
             updateSummaryCounts(0, 0);
 
-            const cards = numbersTextarea.value.trim().split("\n").filter(line => line.trim() !== "");
-            if (cards.length === 0) return;
+            const input = numbersTextarea.value.trim();
+            const cards = input.split("\n").filter(line => line.trim() !== "");
+
+            if (cards.length === 0) {
+                alert("Please enter credit card numbers to check.");
+                return;
+            }
 
             checkBtn.disabled = true;
             stopCheckBtn.disabled = false;
-            appendToStatusOutput(`⏳ Checking ${cards.length} cards...\n`);
+
+            appendToStatusOutput(`⏳ Starting check of ${cards.length} cards...\n`);
 
             for (let i = 0; i < cards.length; i++) {
                 if (stopChecking) break;
+
                 const card = cards[i].trim();
-                appendToStatusOutput(`➡️ Card ${i + 1}/${cards.length}: ${card}\n`);
+                appendToStatusOutput(`➡️ Checking card ${i + 1} of ${cards.length}: ${card}\n`);
 
                 try {
                     const response = await fetch(`${baseUrl}/check?card=${encodeURIComponent(card)}`, { method: 'GET' });
+
+                    if (!response.ok) throw new Error(`API responded with status ${response.status}`);
+
                     const data = await response.json();
 
-                    if (data.status === 'APPROVED') {
+                    let status = 'Unknown';
+                    if (data.status === 'APPROVED') status = 'Live';
+                    else if (data.status === 'DECLINED') status = 'Dead';
+
+                    if (status === 'Live') {
                         liveCount++;
                         liveNumbersTextarea.value += card + "\n";
-                        appendToStatusOutput(`🟢 LIVE: ${data.response}\n`);
-                    } else {
+                        appendToStatusOutput(`Result: 🟢 Live - ${data.response}\n`);
+                    } else if (status === 'Dead') {
                         deadCount++;
                         deadNumbersTextarea.value += card + "\n";
-                        appendToStatusOutput(`🔴 DEAD: ${data.response}\n`);
+                        appendToStatusOutput(`Result: 🔴 Dead - ${data.response}\n`);
+                    } else {
+                        appendToStatusOutput(`Result: ⚪ Unknown - ${data.response}\n`);
                     }
+
                     updateSummaryCounts(liveCount, deadCount);
                 } catch (error) {
-                    appendToStatusOutput(`❌ Error: ${error.message}\n`);
+                    appendToStatusOutput(`❌ Error checking card ${card}: ${error.message}\n`);
                 }
-                if (i !== cards.length - 1) await new Promise(r => setTimeout(r, 2000));
+
+                // ডিলে শুধু শেষ কার্ডের আগে দিবে, শেষ কার্ডের পর দিবে না
+                if (i !== cards.length - 1) {
+                    await countdownTimer(5);
+                }
             }
 
-            appendToStatusOutput("\n✅ Finished!\n");
+            appendToStatusOutput("\n✅ Checking Finished!\n");
             checkBtn.disabled = false;
             stopCheckBtn.disabled = true;
+
+            alert("All cards checked.");
+        }
+
+        // টাইমার শুধু এক লাইনে দেখাবে, আগের লেখা রিপ্লেস করবে
+        function countdownTimer(seconds) {
+            return new Promise((resolve) => {
+                let timeLeft = seconds;
+
+                const previousStatus = resultOutputTextarea.value;
+
+                const interval = setInterval(() => {
+                    resultOutputTextarea.value = `${previousStatus}⏳ Waiting: ${timeLeft} second(s) left...\n`;
+                    resultOutputTextarea.scrollTop = resultOutputTextarea.scrollHeight;
+                    timeLeft--;
+
+                    if (timeLeft < 0) {
+                        clearInterval(interval);
+                        // Clean up the waiting line
+                        resultOutputTextarea.value = previousStatus;
+                        resolve();
+                    }
+                }, 1000);
+            });
         }
 
         function appendToStatusOutput(text) {
@@ -456,16 +804,46 @@
             document.getElementById('muhammad-count').textContent = dead;
         }
 
+
         function toggleMenu() {
-            document.getElementById('dropdown-menu').classList.toggle('show');
+            const menu = document.getElementById('dropdown-menu');
+            menu.classList.toggle('show');
         }
+
+        document.addEventListener('click', function (event) {
+            const toggle = document.querySelector('.menu-toggle');
+            const menu = document.getElementById('dropdown-menu');
+
+            if (!menu.contains(event.target) && !toggle.contains(event.target)) {
+                menu.classList.remove('show');
+            }
+        });
 
         function copyToClipboard(id) {
             const textarea = document.getElementById(id);
+            if (!textarea || !textarea.value.trim()) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Nothing to copy',
+                    background: '#232a41',
+                    color: '#fff'
+                });
+                return;
+            }
+
             textarea.select();
             document.execCommand('copy');
-            Swal.fire({ icon: 'success', title: 'Copied!', timer: 1000, showConfirmButton: false, background: '#232a41', color: '#fff' });
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Copied to clipboard!',
+                showConfirmButton: false,
+                timer: 1500,
+                background: '#232a41',
+                color: '#fff'
+            });
         }
+
     </script>
 </body>
 
