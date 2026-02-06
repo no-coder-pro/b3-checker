@@ -263,8 +263,13 @@
         justify-content: space-between;
     }
 
-    .result-container h2 .live { color: var(--green); }
-    .result-container h2 .dead { color: var(--red-dead); }
+    .result-container h2 .live {
+        color: var(--green);
+    }
+
+    .result-container h2 .dead {
+        color: var(--red-dead);
+    }
 
     .result-textarea {
         width: calc(100% - 20px);
@@ -326,11 +331,6 @@
             </div>
         </header>
         <main class="container">
-            <div class="api-config">
-                <label for="api-url"><strong>Vercel API URL:</strong></label>
-                <input type="text" id="api-url" placeholder="https://your-vercel-app.vercel.app" style="width: 100%; padding: 8px; margin-top: 5px; background: #1a2035; color: white; border: 1px solid #3e4a6e;">
-            </div>
-
             <div class="info-card">
                 <p><strong>braintree</strong> gateway checking. GitHub Pages Front + Vercel API.</p>
             </div>
@@ -378,10 +378,9 @@
         const resultOutputTextarea = document.getElementById('result-output');
         const liveNumbersTextarea = document.getElementById('ali-numbers');
         const deadNumbersTextarea = document.getElementById('muhammad-numbers');
-        const apiUrlInput = document.getElementById('api-url');
 
-        // Load API URL from local storage
-        apiUrlInput.value = localStorage.getItem('https://b3-checker-eight.vercel.app') || '';
+        // PASTE YOUR VERCEL API URL HERE
+        const VERCEL_API_URL = "https://b3-checker-eight.vercel.app";
 
         let stopChecking = false;
         let liveCount = 0;
@@ -396,12 +395,11 @@
         });
 
         async function startChecking() {
-            const baseUrl = apiUrlInput.value.trim().replace(/\/$/, "");
+            const baseUrl = VERCEL_API_URL.trim().replace(/\/$/, "");
             if (!baseUrl) {
-                alert("Please enter your Vercel API URL first.");
+                alert("Please set VERCEL_API_URL in index.html first.");
                 return;
             }
-            localStorage.setItem('vercel_api_url', baseUrl);
 
             stopChecking = false;
             liveCount = 0;
@@ -470,5 +468,5 @@
         }
     </script>
 </body>
-</html>
 
+</html>
