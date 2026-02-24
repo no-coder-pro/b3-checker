@@ -6,5 +6,3 @@
 198.105.121.200:6462:snpzpnke:9xwfib3mrb8x
 64.137.96.74:6641:snpzpnke:9xwfib3mrb8x
 216.10.27.159:6837:snpzpnke:9xwfib3mrb8x
-23.26.71.145:5628:snpzpnke:9xwfib3mrb8x
-23.229.19.94:8689:snpzpnke:9xwfib3mrb8x
