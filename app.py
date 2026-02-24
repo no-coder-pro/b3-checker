@@ -257,11 +257,13 @@ def check_card(cc_line, manual_cookies=None):
     except Exception as e:
         return {'status': 'ERROR', 'card': cc_line, 'response': str(e), 'is_approved': False}
 
-@app.route('/')
-def home():
-    template_path = os.path.join(BASE_DIR, 'index.html')
-    if os.path.exists(template_path): return send_file(template_path)
-    return "API is active. b3 CC Checker is running."
+from flask import Flask, request, jsonify, send_from_directory
+
+@app.route('/', methods=['GET'])
+@app.route('/<path:filename>', methods=['GET'])
+def home(filename='index.html'):
+    """Serve the root files (index.html, style.css, script.js, etc.)"""
+    return send_from_directory(BASE_DIR, filename)
 
 @app.route('/check', methods=['GET', 'POST'])
 def check_single():
