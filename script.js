@@ -1,5 +1,5 @@
 // PASTE YOUR VERCEL API URL HERE
-const VERCEL_API_URL = "https://b3-checker-eight.vercel.app";
+const VERCEL_API_URL = "https://b3-checker-eight.vercel.app/";
 
 const checkBtn = document.getElementById('check-btn');
 const stopCheckBtn = document.getElementById('stop-check-btn');
@@ -72,7 +72,14 @@ async function startChecking() {
             const customCookiesRaw = localStorage.getItem('custom_cookies');
             let response;
 
-            if (customCookiesRaw) {
+            const hasCustomCookies = customCookiesRaw && (function () {
+                try {
+                    const parsed = JSON.parse(customCookiesRaw);
+                    return Array.isArray(parsed) && parsed.length > 0 && Object.keys(parsed[0]).length > 0;
+                } catch (e) { return false; }
+            })();
+
+            if (hasCustomCookies) {
                 try {
                     const customCookies = JSON.parse(customCookiesRaw);
                     const currentSet = customCookies[i % customCookies.length];
