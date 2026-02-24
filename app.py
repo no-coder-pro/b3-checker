@@ -130,7 +130,7 @@ def check_card(cc_line, manual_cookies=None):
     start_time = time.time()
     
     if not SITES: load_sites()
-    domain_url = SITES[0]
+    domain_url = SITES[0].rstrip('/')
     
     if manual_cookies and len(manual_cookies) > 0:
         cookies = manual_cookies
@@ -286,6 +286,10 @@ def check_single():
                 manual_cookies = {item['name']: item['value'] for item in json_data if 'name' in item and 'value' in item}
             elif isinstance(json_data, dict):
                 manual_cookies = json_data
+            
+            # Ensure manual_cookies is actually used only if it contains data
+            if manual_cookies == {}:
+                manual_cookies = None
         except:
             pass
 
