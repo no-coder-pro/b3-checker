@@ -1,7 +1,7 @@
 [
     {
         "domain": ".calipercovers.com",
-        "expirationDate": 1804103418,
+        "expirationDate": 1805595791,
         "hostOnly": false,
         "httpOnly": false,
         "name": "_uetvid",
@@ -10,7 +10,7 @@
         "secure": false,
         "session": false,
         "storeId": null,
-        "value": "c71dd5e0de8311f0bd98e9524c6a291a"
+        "value": "1a639db0044711f19199173585990646"
     },
     {
         "domain": ".calipercovers.com",
@@ -22,11 +22,11 @@
         "secure": false,
         "session": true,
         "storeId": null,
-        "value": "fd%3D2026-02-06%2013%3A21%3A19%7C%7C%7Cep%3Dhttps%3A%2F%2Fwww.calipercovers.com%2Fmy-account%2Fadd-payment-method%2F%7C%7C%7Crf%3Dhttps%3A%2F%2Fweb.telegram.org%2F"
+        "value": "fd%3D2026-02-24%2002%3A22%3A33%7C%7C%7Cep%3Dhttps%3A%2F%2Fwww.calipercovers.com%2F%7C%7C%7Crf%3Dhttp%3A%2F%2F127.0.0.1%3A5000%2F"
     },
     {
         "domain": ".calipercovers.com",
-        "expirationDate": 1770409219,
+        "expirationDate": 1771901591,
         "hostOnly": false,
         "httpOnly": false,
         "name": "__attentive_session_id",
@@ -35,11 +35,11 @@
         "secure": true,
         "session": false,
         "storeId": null,
-        "value": "5a0077178de947e5b5329fe592b7c2ee"
+        "value": "635fe3784de343ada4c0521a8e631ca1"
     },
     {
         "domain": ".calipercovers.com",
-        "expirationDate": 1804967418.085611,
+        "expirationDate": 1806459791.244514,
         "hostOnly": false,
         "httpOnly": false,
         "name": "_ga",
@@ -48,11 +48,11 @@
         "secure": false,
         "session": false,
         "storeId": null,
-        "value": "GA1.1.1108886483.1770384080"
+        "value": "GA1.1.1088232794.1770483885"
     },
     {
         "domain": ".calipercovers.com",
-        "expirationDate": 1770409218,
+        "expirationDate": 1771901589,
         "hostOnly": false,
         "httpOnly": false,
         "name": "sbjs_session",
@@ -61,11 +61,11 @@
         "secure": false,
         "session": false,
         "storeId": null,
-        "value": "pgs%3D6%7C%7C%7Ccpg%3Dhttps%3A%2F%2Fwww.calipercovers.com%2Fmy-account%2Fadd-payment-method%2F"
+        "value": "pgs%3D3%7C%7C%7Ccpg%3Dhttps%3A%2F%2Fwww.calipercovers.com%2Fmy-account%2F%3F_wc_user_reg%3Dtrue"
     },
     {
         "domain": "www.calipercovers.com",
-        "expirationDate": 1770415617,
+        "expirationDate": 1771931299,
         "hostOnly": true,
         "httpOnly": false,
         "name": "yotpo_pixel",
@@ -74,11 +74,11 @@
         "secure": false,
         "session": false,
         "storeId": null,
-        "value": "669127cd-e897-4ea2-af1b-70d0d57e92cd"
+        "value": "fd31ecbe-8c02-4c2a-afde-e926228ec44c"
     },
     {
         "domain": ".calipercovers.com",
-        "expirationDate": 1804080082,
+        "expirationDate": 1804179885,
         "hostOnly": false,
         "httpOnly": false,
         "name": "__attentive_cco",
@@ -87,11 +87,11 @@
         "secure": true,
         "session": false,
         "storeId": null,
-        "value": "1770384082034"
+        "value": "1770483885915"
     },
     {
         "domain": ".calipercovers.com",
-        "expirationDate": 1804967417.758617,
+        "expirationDate": 1806459790.569017,
         "hostOnly": false,
         "httpOnly": false,
         "name": "ccid.90027420",
@@ -100,7 +100,7 @@
         "secure": false,
         "session": false,
         "storeId": null,
-        "value": "352992079.1510293750"
+        "value": "353091885.6763337363"
     },
     {
         "domain": ".calipercovers.com",
@@ -112,11 +112,11 @@
         "secure": false,
         "session": true,
         "storeId": null,
-        "value": "vst%3D2%7C%7C%7Cuip%3D%28none%29%7C%7C%7Cuag%3DMozilla%2F5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F144.0.0.0%20Safari%2F537.36"
+        "value": "vst%3D1%7C%7C%7Cuip%3D%28none%29%7C%7C%7Cuag%3DMozilla%2F5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F145.0.0.0%20Safari%2F537.36"
     },
     {
         "domain": ".calipercovers.com",
-        "expirationDate": 1804103349,
+        "expirationDate": 1805595785,
         "hostOnly": false,
         "httpOnly": false,
         "name": "attntv_mstore_email",
@@ -125,11 +125,11 @@
         "secure": true,
         "session": false,
         "storeId": null,
-        "value": "sdgn@gmail.com:0"
+        "value": "hfuytdsc@yu.com:0"
     },
     {
         "domain": ".calipercovers.com",
-        "expirationDate": 1770470483,
+        "expirationDate": 1771986158,
         "hostOnly": false,
         "httpOnly": false,
         "name": "__attentive_dv",
@@ -142,7 +142,7 @@
     },
     {
         "domain": ".calipercovers.com",
-        "expirationDate": 1804103419,
+        "expirationDate": 1805595791,
         "hostOnly": false,
         "httpOnly": false,
         "name": "__attentive_id",
@@ -151,11 +151,11 @@
         "secure": true,
         "session": false,
         "storeId": null,
-        "value": "9342ef579e9248fdaa4bc33d3d8b2e1f"
+        "value": "768e330fd7ec48b4b40a113e45ce6a0d"
     },
     {
         "domain": ".calipercovers.com",
-        "expirationDate": 1770409219,
+        "expirationDate": 1771901591,
         "hostOnly": false,
         "httpOnly": false,
         "name": "__attentive_pv",
@@ -164,11 +164,11 @@
         "secure": true,
         "session": false,
         "storeId": null,
-        "value": "5"
+        "value": "3"
     },
     {
         "domain": ".calipercovers.com",
-        "expirationDate": 1770409126,
+        "expirationDate": 1771901557,
         "hostOnly": false,
         "httpOnly": false,
         "name": "__attentive_ss_referrer",
@@ -177,11 +177,11 @@
         "secure": true,
         "session": false,
         "storeId": null,
-        "value": "https://www.calipercovers.com/"
+        "value": "http://127.0.0.1:5000/"
     },
     {
         "domain": "www.calipercovers.com",
-        "expirationDate": 1804967421.61017,
+        "expirationDate": 1806459792.98573,
         "hostOnly": true,
         "httpOnly": false,
         "name": "__kla_id",
@@ -190,11 +190,11 @@
         "secure": false,
         "session": false,
         "storeId": null,
-        "value": "eyJjaWQiOiJNV0l5TTJKaE1qTXRNVEUzWWkwMFpUWTFMV0kxTmpndE16WXpZMk5qT1dVNE4yRm0iLCIkZXhjaGFuZ2VfaWQiOiJva2F2bDR5aFVQMTBjWm9uYlJOclZwOHVEZFNnSDBqNkE5Q2RkbEM0UWk4Lkt4ZFJHViJ9"
+        "value": "eyJjaWQiOiJNMlJpWXpKbVl6QXRaak0zWlMwME5HVXhMVGs0WVRrdE16aGpZamt5TTJJME4yWTMiLCIkZXhjaGFuZ2VfaWQiOiJ3WE8wYi1ST055UlhQNU1zZHpWMHZjR1Z6OTZpT2VPNUZaRWUyZFdWRFRvLkt4ZFJHViJ9"
     },
     {
         "domain": ".calipercovers.com",
-        "expirationDate": 1804103419,
+        "expirationDate": 1805595791,
         "hostOnly": false,
         "httpOnly": false,
         "name": "_attn_",
@@ -203,11 +203,11 @@
         "secure": true,
         "session": false,
         "storeId": null,
-        "value": "eyJ1Ijoie1wiY29cIjoxNzcwMzg0MDgyMDE4LFwidW9cIjoxNzcwMzg0MDgyMDE4LFwibWFcIjoyMTkwMCxcImluXCI6ZmFsc2UsXCJ2YWxcIjpcIjkzNDJlZjU3OWU5MjQ4ZmRhYTRiYzMzZDNkOGIyZTFmXCJ9In0="
+        "value": "eyJ1Ijoie1wiY29cIjoxNzcwNDgzODg1OTEyLFwidW9cIjoxNzcwNDgzODg1OTEyLFwibWFcIjoyMTkwMCxcImluXCI6ZmFsc2UsXCJ2YWxcIjpcIjc2OGUzMzBmZDdlYzQ4YjRiNDBhMTEzZTQ1Y2U2YTBkXCJ9In0="
     },
     {
         "domain": ".calipercovers.com",
-        "expirationDate": 1804967418.084166,
+        "expirationDate": 1806459791.243336,
         "hostOnly": false,
         "httpOnly": false,
         "name": "_ga_9VQF57TW94",
@@ -216,11 +216,11 @@
         "secure": false,
         "session": false,
         "storeId": null,
-        "value": "GS2.1.s1770407322$o2$g1$t1770407418$j56$l0$h0"
+        "value": "GS2.1.s1771899757$o4$g1$t1771899791$j26$l0$h0"
     },
     {
         "domain": ".calipercovers.com",
-        "expirationDate": 1778160079,
+        "expirationDate": 1778259885,
         "hostOnly": false,
         "httpOnly": false,
         "name": "_gcl_au",
@@ -229,11 +229,11 @@
         "secure": false,
         "session": false,
         "storeId": null,
-        "value": "1.1.1320691975.1770384079.1257897654.1770407335.1770407349"
+        "value": "1.1.1083360072.1770483885.2012151384.1771899785.1771899785"
     },
     {
         "domain": "www.calipercovers.com",
-        "expirationDate": 1804967419.092567,
+        "expirationDate": 1806459790.162322,
         "hostOnly": true,
         "httpOnly": false,
         "name": "_sp_id.d8f1",
@@ -242,11 +242,11 @@
         "secure": true,
         "session": false,
         "storeId": null,
-        "value": "47bc4cece56524f9.1770384081.2.1770407419.1770384082"
+        "value": "286cf0863cd9fcff.1770483841.5.1771899790.1771149596"
     },
     {
         "domain": "www.calipercovers.com",
-        "expirationDate": 1770409219,
+        "expirationDate": 1771901590,
         "hostOnly": true,
         "httpOnly": false,
         "name": "_sp_ses.d8f1",
@@ -259,7 +259,7 @@
     },
     {
         "domain": ".calipercovers.com",
-        "expirationDate": 1770493818,
+        "expirationDate": 1771986191,
         "hostOnly": false,
         "httpOnly": false,
         "name": "_uetsid",
@@ -268,11 +268,11 @@
         "secure": false,
         "session": false,
         "storeId": null,
-        "value": "b9f95d40035e11f1bdb3f14d052b4608"
+        "value": "afba8c40112711f181847fedaeaa3d39"
     },
     {
         "domain": "www.calipercovers.com",
-        "expirationDate": 1804967418.213994,
+        "expirationDate": 1806459790.33068,
         "hostOnly": true,
         "httpOnly": false,
         "name": "checkout_continuity_service",
@@ -305,7 +305,7 @@
         "secure": false,
         "session": true,
         "storeId": null,
-        "value": "typ%3Dreferral%7C%7C%7Csrc%3Dweb.telegram.org%7C%7C%7Cmdm%3Dreferral%7C%7C%7Ccmp%3D%28none%29%7C%7C%7Ccnt%3D%2F%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29"
+        "value": "typ%3Dreferral%7C%7C%7Csrc%3D127.0.0.1%7C%7C%7Cmdm%3Dreferral%7C%7C%7Ccmp%3D%28none%29%7C%7C%7Ccnt%3D%2F%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29"
     },
     {
         "domain": ".calipercovers.com",
@@ -317,7 +317,7 @@
         "secure": false,
         "session": true,
         "storeId": null,
-        "value": "typ%3Dreferral%7C%7C%7Csrc%3Dweb.telegram.org%7C%7C%7Cmdm%3Dreferral%7C%7C%7Ccmp%3D%28none%29%7C%7C%7Ccnt%3D%2F%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29"
+        "value": "typ%3Dreferral%7C%7C%7Csrc%3D127.0.0.1%7C%7C%7Cmdm%3Dreferral%7C%7C%7Ccmp%3D%28none%29%7C%7C%7Ccnt%3D%2F%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29"
     },
     {
         "domain": ".calipercovers.com",
@@ -329,7 +329,7 @@
         "secure": false,
         "session": true,
         "storeId": null,
-        "value": "fd%3D2026-02-06%2013%3A21%3A19%7C%7C%7Cep%3Dhttps%3A%2F%2Fwww.calipercovers.com%2Fmy-account%2Fadd-payment-method%2F%7C%7C%7Crf%3Dhttps%3A%2F%2Fweb.telegram.org%2F"
+        "value": "fd%3D2026-02-24%2002%3A22%3A33%7C%7C%7Cep%3Dhttps%3A%2F%2Fwww.calipercovers.com%2F%7C%7C%7Crf%3Dhttp%3A%2F%2F127.0.0.1%3A5000%2F"
     },
     {
         "domain": ".calipercovers.com",
@@ -345,7 +345,7 @@
     },
     {
         "domain": "www.calipercovers.com",
-        "expirationDate": 1770666524.545102,
+        "expirationDate": 1772158960.269491,
         "hostOnly": true,
         "httpOnly": false,
         "name": "wcacr_user_country",
@@ -358,7 +358,7 @@
     },
     {
         "domain": "www.calipercovers.com",
-        "expirationDate": 1770450552.511574,
+        "expirationDate": 1771942989.056632,
         "hostOnly": true,
         "httpOnly": true,
         "name": "wfwaf-authcookie-0cfc0dfc6182cc86058203ff9ed084fe",
@@ -367,11 +367,11 @@
         "secure": true,
         "session": false,
         "storeId": null,
-        "value": "1187727%7Cother%7Cread%7C48f5637bf2e51b08b822beadf1251fbeb1473bcb15b526f0cbd7082e8fddbebe"
+        "value": "1190071%7Cother%7Cread%7Caabafd14a3a9a05746ce23c2bbf7ab697f3c91bda82051973791087f0c360e04"
     },
     {
         "domain": "www.calipercovers.com",
-        "expirationDate": 1771660151.503713,
+        "expirationDate": 1773152588.034161,
         "hostOnly": true,
         "httpOnly": true,
         "name": "wordpress_logged_in_9a06d022e5a0d800df86e500459c6102",
@@ -380,6 +380,6 @@
         "secure": true,
         "session": false,
         "storeId": null,
-        "value": "sdgn%40gmail.com%7C1771616953%7CRU20WFuKravZFjDs2UEUAjYCNKFOVcgEtPR71IpTvEl%7C9a8c3a4714dce0ca72e793cd2c636168b31d7d0e0836650d0b48f93cc6b75c44"
+        "value": "utyd%7C1773109390%7CQu1mhR0gKDCL9nTaoCbijq0AIj5FdR3uDVlwt8ELBIt%7Ccf02a94dbfd0e7403cc17652f187e48e70ddc7e6974c039344f4ce58852f640b"
     }
 ]
